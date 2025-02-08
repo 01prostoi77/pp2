@@ -1,99 +1,87 @@
+
 #1
-class MyClass:
+class String:
     def __init__(self):
-        self.string = ""
-
-    def getString(self):
-        self.string = input("Enter a string:")
-
-    def printString(self):
-        print(self.string.upper())
-
-s = MyClass()
-s.getString()
-s.printString()
+        self.newstr = ""
+    def get_string(self):
+        self.newstr = input("Write a string: ")
+     def upper(self):
+         print(self.newstr.upper())
+ p1 = String()
+ p1.get_string()
+ p1.upper()
 
 #2
+
 class Shape:
     def area(self):
         return 0
-    
 class Square(Shape):
     def __init__(self, length):
         self.length = length
     def area(self):
-        return self.length * self.length
-    
-square = Square(4)
-print("Area of square:", square.area())
-    
-#3
-class Rectangle(Shape):
-    def __init__(self, length, width):
-        self.length = length
-        self.width = width
+        return self.length ** 2
+square_obj = Square(int(input("length? ")))
+print(f"{square_obj.area()}")
+# 3
+
+class rectangle(Shape):
+    def __init__(self,leng=0,width=0):
+        self.leng=int(input("What is the leng? "))
+        self.width=int(input("What is the width? "))
     def area(self):
-        return self.length * self.width
+        return self.leng*self.width
+obj=rectangle()
+print(obj.area())
 
-rectangle = Rectangle(4, 5)
-print("Area of rectangle:", rectangle.area())
-    
+
 #4
-import math
-
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y 
-
-    def show(self):
-        print(f"Point: ({self.x}, {self.y})")
-    
-    def move(self, x, y):
+class point:
+    def __init__(self,x = 0,y = 0):
         self.x = x
         self.y = y
+        pos_x = x
+        pos_y = y
 
-    def dist(self, other_point):
-        return math.sqrt((self.x - other_point.x) ** 2 + (self.y - other_point.y) ** 2)
+    def display(self):
+        print(tuple((self.x,self.y)))
+
+    def move(self,new_x = 0,new_y = 0):
+        self.x = new_x
+        self.y = new_y
+        pos_x = new_x
+        pos_y = new_y
     
-p1 = Point(0, 0)
-p2 = Point(3, 4)
-p1.show()
-p2.show()
-print("Distance between points:", p1.dist(p2))
+    def dist(self,to_x,to_y):
+        return (((to_x - self.x) ** 2) + ((to_y - self.y) ** 2)) ** 0.5
     
+obj4 = point(2,2)
+obj4.display()
+obj4.move(1,4)
+print(obj4.dist(2,4))
+
 #5
-class Account:
-    def __init__(self, owner, balance=0):
-        self.owner = owner
-        self.balance = balance
-
-    def deposit(self, amount):
-        self.balance += amount
-        print(f"Deposited {amount}. New balance is {self.balance}.")
-
-    def withdraw(self, amount):
-        if amount <= self.balance:
-            self.balance -= amount
-            print(f"Withdrew {amount}. New balabce is {self.balance}.")
+class accont:
+    def __init__(self,owner,balance=0):
+        self.owner=owner
+        self.balance=balance
+    def deposit(self,amount):
+        self.balance+=amount
+        print(f"{self.owner} have: {self.balance}")
+    def withdraw(self,amount):
+        if self.balance<amount:
+            print("{self.owner} cant take money, its too much")
         else:
-            print("Insufficient funds for withdrawal")
+            self.balance-=amount
+            print(f"{self.owner} now ur balance is {self.balance}")
+obj=accont("D",1000)
+obj.deposit(1000)
+obj.withdraw(300)
 
-account = Account("John Doe", 1000)
-account.deposit(500)
-account.withdraw(300)
-account.withdraw(2000)
 
 #6
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
 
-numbers = [2, 3, 4, 5, 10, 13, 17, 19, 21]
-prime_numbers = list(filter(lambda x: is_prime(x), numbers))
-
-print(prime_numbers)
+is_prime = lambda x: x > 1 and all(x % i != 0 for i in range(2, int(x**0.5) + 1))
+nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13]
+prime_numbers = list(filter(is_prime, nums))
+print("Prime numbers in the list:", prime_numbers)
